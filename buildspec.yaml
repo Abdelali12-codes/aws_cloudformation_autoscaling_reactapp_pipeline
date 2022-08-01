@@ -1,0 +1,29 @@
+version: 0.2
+#env:
+#    variables:
+#       AWS_DEFAULT_REGION: "eu-west-3"
+#       AWS_ACCOUNT_ID: "080266302756"
+#    parameter-store:
+#       AWS_ECR_REPO: "/devops/AWS_ECR_REPO"
+
+phases:
+  install:
+      runtime-versions:
+          nodejs: 16
+  pre_build:
+    commands:
+      - echo pre_build.....
+      - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build
+  post_build:
+    commands:
+        - echo Post Build started on `date`
+artifacts:
+    files: 
+      - build/**/*
+      - scripts/*
+      - nginx.conf
+      - appspec.yml
